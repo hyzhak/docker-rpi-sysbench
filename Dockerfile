@@ -6,4 +6,4 @@ RUN apt-get update && apt-get install -y sysbench
 COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["--test-cpu"]
+CMD ["--test-cpu", "--test-file-io"]
