@@ -1,5 +1,7 @@
 db:
   image: hypriot/rpi-mysql:latest
+  environment:
+    - MYSQL_ROOT_PASSWORD = "secret"
 
 sysbench:
   build: .
@@ -7,5 +9,6 @@ sysbench:
     - TABLE_SIZE = 1000000
     - TEST_DB = "test"
     - DB_HOST = "db"
+    - MYSQL_ROOT_PASSWORD = "secret"
   links:
     - db

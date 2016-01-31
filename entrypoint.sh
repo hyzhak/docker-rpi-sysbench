@@ -78,7 +78,7 @@ if [ "$testMySQL" = true ]; then
            --mysql-host="$DB_HOST" \
            --mysql-db="$TEST_DB" \
            --mysql-user=root \
-           --mysql-password="$MYSQL_ENV_MYSQL_ROOT_PASSWORD" \
+           --mysql-password="$MYSQL_ROOT_PASSWORD" \
            prepare
 
   sysbench --test=oltp \
@@ -86,7 +86,7 @@ if [ "$testMySQL" = true ]; then
            --mysql-host="$DB_HOST" \
            --mysql-db="$TEST_DB" \
            --mysql-user=root \
-           --mysql-password="$MYSQL_ENV_MYSQL_ROOT_PASSWORD" \
+           --mysql-password="$MYSQL_ROOT_PASSWORD" \
            --max-time=60 \
            --oltp-read-only=on \
            --max-requests=0 \
@@ -97,7 +97,7 @@ if [ "$testMySQL" = true ]; then
            --mysql-host="$DB_HOST" \
            --mysql-db="$TEST_DB" \
            --mysql-user=root \
-           --mysql-password="$MYSQL_ENV_MYSQL_ROOT_PASSWORD" \
+           --mysql-password="$MYSQL_ROOT_PASSWORD" \
            cleanup
 fi
 
