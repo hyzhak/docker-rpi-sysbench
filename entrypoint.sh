@@ -1,4 +1,9 @@
 #!/bin/bash
+
+#
+# Based on https://www.howtoforge.com/how-to-benchmark-your-system-cpu-file-io-mysql-with-sysbench
+#
+
 set -e
 
 if [[ $# -eq 0 ]]; then
@@ -30,6 +35,8 @@ if [ "$testCPU" = true ]; then
   echo
   echo "Start Cpu Test"
   echo
+  echo "∙∙∙·▫▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ☼)===>"
+  echo
 
   sysbench --test=cpu --cpu-max-prime=20000 run
 fi
@@ -39,6 +46,8 @@ if [ "testFileIO" = true ]; then
   echo "∙∙∙∙∙·▫▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ☼)===>"
   echo
   echo "Start FileIo Test"
+  echo
+  echo "∙∙∙·▫▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ☼)===>"
   echo
 
   fileSize = 8G
