@@ -4,7 +4,8 @@ db:
 sysbench:
   build: .
   environment:
-    - TABLE_SIZE: 1000000
-    - TEST_DB: "test"
-    - DB_HOST: "db"
-  links: db
+    - TABLE_SIZE = 1000000
+    - TEST_DB = "test"
+    - DB_HOST = "db"
+  links:
+    - db
