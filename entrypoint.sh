@@ -41,7 +41,7 @@ if [ "$testCPU" = true ]; then
   sysbench --test=cpu --cpu-max-prime=20000 run
 fi
 
-if [ "testFileIO" = true ]; then
+if [ "$testFileIO" = true ]; then
   echo
   echo "∙∙∙∙∙·▫▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ☼)===>"
   echo
