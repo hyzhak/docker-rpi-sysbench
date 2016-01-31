@@ -73,17 +73,32 @@ if [ "$testMySQL" = true ]; then
   echo "∙∙∙·▫▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ☼)===>"
   echo
 
-  tableSize=1000000
+  sysbench --test=oltp \
+           --oltp-table-size="$TABLE_SIZE" \
+           --mysql-host="$DB_HOST" \
+           --mysql-db="$TEST_DB" \
+           --mysql-user=root \
+           --mysql-password="$MYSQL_ENV_MYSQL_ROOT_PASSWORD" \
+           prepare
 
-  sysbench --test=oltp --oltp-table-size="$tableSize" --mysql-db=test --mysql-user=root \
-           --mysql-password="$MYSQL_ENV_MYSQL_ROOT_PASSWORD" prepare
+  sysbench --test=oltp \
+           --oltp-table-size="$TABLE_SIZE" \
+           --mysql-host="$DB_HOST" \
+           --mysql-db="$TEST_DB" \
+           --mysql-user=root \
+           --mysql-password="$MYSQL_ENV_MYSQL_ROOT_PASSWORD" \
+           --max-time=60 \
+           --oltp-read-only=on \
+           --max-requests=0 \
+           --num-threads=8 \
+           run
 
-  sysbench --test=oltp --oltp-table-size="$tableSize" --mysql-db=test --mysql-user=root \
-           --mysql-password="$MYSQL_ENV_MYSQL_ROOT_PASSWORD" --max-time=60 \
-           --oltp-read-only=on --max-requests=0 --num-threads=8 run
-
-  sysbench --test=oltp --mysql-db=test --mysql-user=root \
-           --mysql-password=yourrootsqlpassword cleanup
+  sysbench --test=oltp \
+           --mysql-host="$DB_HOST" \
+           --mysql-db="$TEST_DB" \
+           --mysql-user=root \
+           --mysql-password="$MYSQL_ENV_MYSQL_ROOT_PASSWORD" \
+           cleanup
 fi
 
 exit 0
