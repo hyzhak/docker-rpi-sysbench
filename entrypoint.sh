@@ -50,7 +50,7 @@ if [ "$testFileIO" = true ]; then
   echo "∙∙∙·▫▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ☼)===>"
   echo
 
-  fileSize = 8G
+  fileSize="8G"
 
   sysbench --test=fileio --file-total-size="$fileSize" prepare
   sysbench --test=fileio --file-total-size="$fileSize" --file-test-mode=rndrw --init-rng=on --max-time=300 --max-requests=0 run
