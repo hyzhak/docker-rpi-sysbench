@@ -2,6 +2,7 @@ FROM resin/rpi-raspbian:wheezy
 MAINTAINER Eugene Krevenets <ievgenii.krevenets@gmail.com>
 
 RUN apt-get update && \
+    apt-get install -y ca-certificates && \
     apt-get install -y sysbench && \
     apt-get install -y wget
 
