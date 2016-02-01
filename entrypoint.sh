@@ -6,6 +6,8 @@
 
 set -e
 
+function join { local IFS="$1"; shift; echo "$*"; }
+
 if [[ $# -eq 0 ]]; then
   testCPU=true
   testFileIO=true
@@ -14,6 +16,9 @@ else
   testCPU=false
   testFileIO=false
   testMySQL=false
+  splitCommand=false
+  beforeSplit=()
+  badOptions=()
   while test $# -gt 0
   do
       case "$1" in
@@ -26,12 +31,33 @@ else
           --test-mysql)
             testMySQL=true
             ;;
+          --)
+            splitCommand=true
+
+            badOptions=()
+            testCPU=false
+            testFileIO=false
+            testMySQL=false
+            ;;
           *)
-            echo "bad option $1"
+            badOptions+=($1)
             ;;
       esac
+
+      if [ "$splitCommand" = false ]; then
+        beforeSplit+=($1)
+      fi
+
       shift
   done
+
+  if [ "$splitCommand" = true ]; then
+    eval $(join " " "${beforeSplit[@]}")
+  fi
+
+  if [ ${#badOptions[@]} -gt 0 ]; then
+    echo "bad options: $(join , "${badOptions[@]}")"
+  fi
 fi
 
 if [ "$testCPU" = true ]; then

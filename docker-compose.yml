@@ -5,7 +5,7 @@ db:
 
 sysbench:
   build: .
-  command: dockerize -wait http://db:3306 --test-mysql
+  command: dockerize -wait http://db:3306 -- --test-mysql
   environment:
     - FILE_SIZE=8G
     - TABLE_SIZE=1000000
